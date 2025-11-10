@@ -1,26 +1,30 @@
-name: build and test 
+name: build and test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+
     steps:
-    - name: Clone the GitHub repo on the runners 
-      uses: actions/checkout@v4
-    - name: Use Node.js 20
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'npm'
-    - name: Run program dependencies
-      run: npm install
-    - name: Run the app
-      run: npm run start&
-    - name: Run integration tests
-      run: npm test
+      - name: Clone the GitHub repo on the runners
+        uses: actions/checkout@v4
+      - name: Use Node.js matrix
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: "npm"
+      - name: Run program dependencies
+        run: npm install
+      - name: Run the app
+        run: npm run start&
+      - name: Run integration tests
+        run: npm test
