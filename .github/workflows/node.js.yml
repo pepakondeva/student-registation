@@ -1,0 +1,26 @@
+name: build and test 
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone the GitHub repo on the runners 
+      uses: actions/checkout@v4
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+    - name: Run program dependencies
+      run: npm install
+    - name: Run the app
+      run: npm run start&
+    - name: Run integration tests
+      run: npm test
