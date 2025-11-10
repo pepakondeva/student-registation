@@ -53,12 +53,5 @@ jobs:
       - name: Deploy to production
         uses: JorgeLNJunior/render-deploy@v1.4.6
         with:
-<<<<<<< HEAD
           service-id: ${{ secrets.SERVICE_ID }}
           api-key: ${{ secrets.API_TOKEN }}
-          wait_deploy: true
-=======
-          service-id: ${{ secrets.API_TOKEN }}
-          api-key: ${{ secrets.SERVICE_ID }}
-          wait-for-success: true
->>>>>>> parent of d696b0b (sjiss)
